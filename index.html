@@ -263,6 +263,40 @@
             .btn {
                 width: 100%;
             }
+          .wire-transfer {
+        background: #f1f5f9;
+        border: 2px solid var(--gt-color);
+    }
+
+    .wire-transfer .logo-container {
+        border-color: var(--gt-color);
+        background: rgba(255, 102, 0, 0.1);
+    }
+
+    .wire-transfer h3 {
+        color: var(--gt-color);
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .wire-transfer .copy-field {
+        background: #fff3e0;
+        border: 1px dashed var(--gt-color);
+    }
+
+    .wire-transfer .copy-btn {
+        background: var(--gt-color);
+        border: 1px solid #e65100;
+    }
+
+    .wire-transfer .instructions {
+        background: #fffaf0;
+        border-left: 4px solid var(--gt-color);
+    }
+
+    .wire-transfer .instructions h4 {
+        color: var(--gt-color);
+    }
         }
     </style>
 </head>
@@ -350,6 +384,41 @@
                 </a>
             </div>
         </div>
+        <!-- Bank Wire Transfer Donation -->
+<div class="donation-container wire-transfer" data-type="wire-transfer">
+    <div class="logo-container">
+        <img src="https://www.svgrepo.com/show/1155/wire-transfer-logo.svg" alt="Bank Wire Transfer Logo" class="logo">
+    </div>
+    <h3><i class="fas fa-exchange-alt"></i> Bank Wire Transfer</h3>
+    <p>Send your Ramadan donation via international bank wire transfer to:</p>
+
+    <div class="copy-field">
+        <span class="copy-text">2032202001590</span>
+        <button class="copy-btn" onclick="copyToClipboard(this, '2032202001590')">
+            <i class="fas fa-copy"></i> Copy
+        </button>
+        <span class="tooltip">Copied!</span>
+    </div>
+
+    <div class="instructions">
+        <h4><i class="fas fa-info-circle"></i> Bank Details:</h4>
+        <ul>
+            <li><strong>Bank Name:</strong> Guaranty Trust Bank (Gambia) Limited</li>
+            <li><strong>SWIFT/BIC Code:</strong> GTBGGMGMXXX</li>
+        </ul>
+    </div>
+
+    <div class="instructions">
+        <h4><i class="fas fa-info-circle"></i> How to Donate:</h4>
+        <ol>
+            <li>Visit your local bank or use your online banking platform</li>
+            <li>Choose "International Wire Transfer"</li>
+            <li>Enter the provided account details and SWIFT/BIC code</li>
+            <li>Specify the donation amount</li>
+            <li>Confirm and complete the transaction</li>
+        </ol>
+    </div>
+</div>
     </div>
 
     <script>
