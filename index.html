@@ -3,14 +3,388 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DIGIMENU</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Ramadan Charity Donations</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #d97706;
+            --wave-color: #0084ff;
+            --gt-color: #ff6600;
+            --success-color: #28a745;
+            --bg-color: #f8f9fa;
+            --text-color: #333;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s ease-in-out;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(216, 241, 230, 0.46) 0%, rgba(233, 226, 226, 0.28) 90.1%);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--wave-color), var(--gt-color));
+            animation: gradient 3s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .ramadan-message {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin: 20px 0;
+            position: relative;
+            padding: 20px;
+            text-align: center;
+            font-style: italic;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px var(--shadow-color);
+        }
+
+        .container-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .donation-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 20px var(--shadow-color);
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .donation-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px var(--shadow-color);
+        }
+
+        .logo-container {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--primary-color);
+            padding: 10px;
+        }
+
+        .logo {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .copy-field {
+            display: flex;
+            align-items: center;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 15px 0;
+            position: relative;
+        }
+
+        .copy-text {
+            flex: 1;
+            font-family: monospace;
+            font-size: 1.1rem;
+            margin-right: 10px;
+        }
+
+        .copy-btn {
+            background: var(--success-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .copy-btn:hover {
+            filter: brightness(1.1);
+        }
+
+        .instructions {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .instructions ol {
+            padding-left: 20px;
+        }
+
+        .instructions li {
+            margin: 10px 0;
+            position: relative;
+        }
+
+        .instructions li::marker {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            flex: 1;
+            min-width: 140px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .wave-btn {
+            background: var(--wave-color);
+        }
+
+        .gt-btn {
+            background: var(--gt-color);
+        }
+
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s;
+        }
+
+        .success-animation {
+            animation: success-bounce 0.5s ease-in-out;
+        }
+
+        @keyframes success-bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @media (max-width: 768px) {
+            .container-wrapper {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .donation-container {
+                width: 100%;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="logo-container">
-        <div class="icon">📱</div>  <!-- Replace with an actual image if needed -->
-        <h1 class="title">DIGIMENU</h1>
-        <p class="slogan">Tap, Scan, Dine — Effortlessly</p>
+    <div class="header">
+        <h1><i class="fas fa-mosque"></i> Ramadan Charity Portal</h1>
+        <p class="ramadan-message">
+            "Whoever feeds a fasting person will have a reward like that of the fasting person, without any reduction in his reward."
+            <br>
+            <small>- Prophet Muhammad (ﷺ)</small>
+        </p>
     </div>
+
+    <div class="container-wrapper">
+        <!-- Wave Mobile Money Donation -->
+        <div class="donation-container" data-type="wave">
+            <div class="logo-container">
+                <img src="/api/placeholder/150/150" alt="Wave Mobile Money Logo" class="logo">
+            </div>
+            <h3><i class="fas fa-mobile-alt"></i> Wave Mobile Money</h3>
+            <p>Send your Ramadan donation securely via Wave to:</p>
+            
+            <div class="copy-field">
+                <span class="copy-text">+220 2309840</span>
+                <button class="copy-btn" onclick="copyToClipboard(this, '+220 2309840')">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+                <span class="tooltip">Copied!</span>
+            </div>
+
+            <div class="instructions">
+                <h4><i class="fas fa-info-circle"></i> How to Donate:</h4>
+                <ol>
+                    <li>Launch your Wave Mobile Money app</li>
+                    <li>Tap on "Send Money" option</li>
+                    <li>Enter the number: <strong>+220 2309840</strong></li>
+                    <li>Input your desired donation amount</li>
+                    <li>Confirm and complete the transaction</li>
+                </ol>
+            </div>
+
+            <div class="btn-group">
+                <a href="https://apps.apple.com/app/wave-mobile-money/id1523884528" class="btn wave-btn" target="_blank">
+                    <i class="fab fa-apple"></i> iOS App
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=com.wave.personal" class="btn wave-btn" target="_blank">
+                    <i class="fab fa-android"></i> Android App
+                </a>
+            </div>
+        </div>
+
+        <!-- GTBank Donation -->
+        <div class="donation-container" data-type="gtbank">
+            <div class="logo-container">
+                <img src="/api/placeholder/150/150" alt="GTBank Logo" class="logo">
+            </div>
+            <h3><i class="fas fa-university"></i> GTBank Transfer</h3>
+            <p>Make your Ramadan donation via bank transfer to:</p>
+            
+            <div class="copy-field">
+                <span class="copy-text">2032202001590</span>
+                <button class="copy-btn" onclick="copyToClipboard(this, '2032202001590')">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+                <span class="tooltip">Copied!</span>
+            </div>
+
+            <div class="instructions">
+                <h4><i class="fas fa-info-circle"></i> How to Donate:</h4>
+                <ol>
+                    <li>Log in to your GTBank Mobile App</li>
+                    <li>Select "Transfers" from the menu</li>
+                    <li>Enter account number: <strong>2032202001590</strong></li>
+                    <li>Input your donation amount</li>
+                    <li>Verify and complete the transfer</li>
+                </ol>
+            </div>
+
+            <div class="btn-group">
+                <a href="https://apps.apple.com/app/idgtbank-mobile-app" class="btn gt-btn" target="_blank">
+                    <i class="fab fa-apple"></i> iOS App
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=com.gtbank.mobileapp" class="btn gt-btn" target="_blank">
+                    <i class="fab fa-android"></i> Android App
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function copyToClipboard(button, text) {
+            navigator.clipboard.writeText(text).then(() => {
+                // Show tooltip
+                const tooltip = button.nextElementSibling;
+                tooltip.style.opacity = '1';
+                tooltip.style.visibility = 'visible';
+                
+                // Add success animation to button
+                button.classList.add('success-animation');
+                
+                // Hide tooltip and remove animation after delay
+                setTimeout(() => {
+                    tooltip.style.opacity = '0';
+                    tooltip.style.visibility = 'hidden';
+                    button.classList.remove('success-animation');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                alert('Failed to copy. Please try again.');
+            });
+        }
+
+        // Add hover effect to donation containers
+        document.querySelectorAll('.donation-container').forEach(container => {
+            container.addEventListener('mouseenter', () => {
+                container.style.transform = 'translateY(-5px)';
+            });
+            
+            container.addEventListener('mouseleave', () => {
+                container.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
 </body>
 </html>
